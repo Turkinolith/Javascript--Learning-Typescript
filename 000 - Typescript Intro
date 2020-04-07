@@ -1,0 +1,68 @@
+// Interfaces are used to define the structure of an object. Much like a mongoose schema.
+
+interface todo {
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
+NOTE: the actual object that is returned from jsonplaceholder has this structure:
+{
+userId: 1,
+id: 1,
+title: "delectus aut autem",
+completed: false
+}
+
+As you see, I'm completely ignoring the "userId" property.
+This is fine. Inside an interface I can freely ignore properties if I want to.
+
+
+To define an object as following the interface I use this syntax:
+	const todo = res.data as todo;
+
+This is telling typescript that the res.data is expected to follow the todo interface.
+
+
+
+
+
+	*** Typescript to tell you when inputs are not what is expected ****
+In this example I wrote a function that is expecting paramters in a specific order, but when I call the function I pass them out of order.
+
+axios.get(url).then((res) => {
+  const todo = res.data as todo;
+
+  const id = todo.id;
+  const title = todo.title;
+  const completed = todo.completed;
+
+  logTodo(id, completed, title);
+});
+
+const logTodo = (id, title, completed) => {
+  console.log(`
+    The Todo with ID: ${id}
+    Has title of: ${title}
+    Is it completed? ${completed}
+    `);
+};
+
+In this case I won't get a warning about this untill I run the program.
+If you use typescript appropriately you would get an error or warning about this before running the code.
+
+To fix this on the "logTodo" function add in a type annotation for each of the arguments.
+
+	const logTodo = (id: number, title: string, completed: Boolean) => {
+	  console.log(`
+		The Todo with ID: ${id}
+		Has title of: ${title}
+		Is it completed? ${completed}
+		`);
+	};
+
+Now I get a warning that in this line:
+	logTodo(id, completed, title);
+that "completed" is of the wrong type. As soon as I remove it I get another error that the function is expecting 3 arguments but I'm only giving 2.
+
+
