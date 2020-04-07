@@ -1,0 +1,29 @@
+*************************
+**** Course Overview ****
+*************************
+
+When learning typescript there are 2 distinct categories of knowledge needed:
+
+#1 - Syntax & Features
+	- What is an interface?
+	- What is the syntax for defining an interface?
+
+#2 - Design Patterns with TS
+	- How do we use interfaces to write reusable code?
+
+**Instructor wanted to focus on design patterns, but realized you just have to get the boring syntax out of the way first to set up for doing design patterns.
+
+Course Goal:
+
+------ Syntax & Features ------
+Understand basic types in TS
+Function typing & annotations
+Type definition files
+Arrays in TS
+Modules systems
+Classes & Refresher on OOP
+
+------ Design Patterns ------
+Projects
+
+
