@@ -1,0 +1,13 @@
+
+*******************************************
+**** Type Annotations & Type Inference ****
+*******************************************
+
+They apply slightly differently to Variables, functions and objects.
+
+Type Annotation - Code we add to tell Typescript what type of value a variable will refer to.
+
+Type Inference - Typescript tries to figure out what type of value a variable refers to.
+
+
+Type Annotations (Developers tell Typescript the type <-------> Type Inference (Typescript guesses the type)
