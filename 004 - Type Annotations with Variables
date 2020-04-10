@@ -1,0 +1,36 @@
+************************************
+**** Annotations with Variables ****
+************************************
+const apples: number = 5;
+
+The colon and the word number right after it is the type annotation.
+
+In this case it tells TS that I'm only ever going to assign a value of type number to the variable "apples"
+If I try to update the value to something other than number, like a bool. it'll show me an error.
+
+Same thing if I try to update the value assigned as well.
+	let apples: number = 10;
+This works fine,
+	apples = "asdfjalksdj"
+This will error.
+
+
+************************************************************
+**** Some examples of Object Annotations with Variables ****
+************************************************************
+
+
+
+const apples: number = 5;
+
+let speed: string = "fast";
+
+let hasName: Boolean = true;
+
+let nothingMuch: null = null; //* First example of a value that has a name identical to its type, their different things.
+
+let nothing: undefined = undefined;
+
+// Built in objects
+let now: Date = new Date();
+
