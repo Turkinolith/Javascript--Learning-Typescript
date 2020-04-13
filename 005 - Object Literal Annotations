@@ -1,0 +1,136 @@
+************************************
+**** Object Literal Annotations ****
+************************************
+
+	*** Arrays ***
+	**************
+An array that will have nothing but strings inside of it
+	let colors: string[] = ["red", "green", "blue"];
+This is saying that the variable colors will be an array, defined by the square brackets, and that the array will only contain strings.
+
+Same thing for an array of numbers or bools
+	let mynumbers: number[] = [1,2,3];
+	let truths: boolean[] = [true, false, true]
+
+
+
+	*** Classes ***
+	***************
+
+Classes get a bit more funky, but are still pretty obvious to work with so far:
+
+First, lets define a class called "Car"
+
+class Car { }
+
+Now lets make a variable
+	let car: Car = new Car();
+This is saying that the variable "car" will be of the class "Car", then I initialize a new instance of the class.
+
+
+
+
+	*** Object Literal ***
+	**********************
+
+First, lets define an object with 2 properties:
+
+let point = {
+	x: 10,
+	y: 20
+}
+
+How would I make a type annotation for this?
+You add a colon after the variable as before, then put in curly bracers along with a list of the property names with their respective types.
+
+NOTE: it uses a semicolon to separate properties.
+
+let point: { x: number; y: number } = {
+	x: 10,
+	y: 20
+}
+
+So, I'm declaring a variable called point, I'm assigning it an object that has an x property and y property, then simultainously
+adding in a type annotation for point and saying point can only ever have an object assigned to it that has a property called x that is 
+a number and a property called y that is a number.
+
+!BIG NOTE: Object literal MUST be exactly the same as the declaration. I can't say { x: number; y: number }
+then add a value {x:3, y:2, g:7} It can't have a property "g" as it's not in the type annotation.
+
+
+
+	*** Function ***
+	****************
+Lets declare a function first
+
+	const logNumber = (i) => {
+	  console.log(i);
+	};
+
+So lets think about what properties I care about with a function.
+As a developer I most care about the arguments going into the function and what different types of values I expect the function to return.
+
+So, thats what I'm going to encode inside the annotation to tell typescript what different arguments it will take and what different values it will return.
+
+So after the variable name put a colon, then in parenthesis I'll note the arguments and the types that will be going into them, then I'll put an arrow then list the different values I expect the function
+to return.
+In the case of this function it doesn't explicitly return anything. (it uses a console.log) so I put the expected return type of "void"
+
+	const logNumber: (i: number) => void = (i) => {
+	  console.log(i);
+	};
+	
+
+Lets break this down:
+	variable declaration- const logNumber
+	type annotation- : (i: number) => void 
+	function assignment- = (i) => { console.log(i) };
+
+So, the annotation is a comment of trying to tell typescript what I'm doing here.
+Even though it really looks like a function in its own complete right, it is not a function that I'm going to run, its a description of a function.
+
+**************************************************
+Here is the code again as it currently stands:
+
+const apples: number = 5;
+
+let speed: string = "fast";
+
+let hasName: Boolean = true;
+
+let nothingMuch: null = null; //* First example of a value that has a name identical to its type, their different things.
+
+let nothing: undefined = undefined;
+
+// Built in objects
+let now: Date = new Date();
+
+// Array
+let colors: string[] = ["red", "green", "blue"];
+let mynumbers: number[] = [1, 2, 3];
+let truths: boolean[] = [true, false, true];
+
+// Classes
+class Car {}
+let car: Car = new Car();
+
+// Object Literal
+let point: { x: number; y: number } = {
+  x: 10,
+  y: 20,
+};
+
+// Function
+const logNumber: (i: number) => void = (i) => {
+  console.log(i);
+};
+
+
+
+Here is an interesting note, if I hover over the "apples" i get a tooltip that the type is "number", which makes sense as I annotated it to number.
+But, if I remove the annotation and hover over it again, the type is still showing as "number"
+
+This is the dynamic to understand between "Type Annotations" and "Type inference"
+
+In fact, in the above code not a single type annotation is actually required. All of them can be infered by Typescript.
+I can remove the type annotations and they still work. This is Type Inference system in action and will be discussed more next.
