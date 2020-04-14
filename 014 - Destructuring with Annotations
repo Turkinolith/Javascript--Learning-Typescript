@@ -42,3 +42,16 @@ Replace the variable itself with the actual destructuring statement.
 
 
 Note, that I did not try to stick the annotation types along with the destructuring portion. They will always be 2 separate statements separated by the colon.
+
+And here is the same thing, but with array destructuring. note in the annotations I don't work with the variable names, just the types.
+
+	const logArr = ([varone, vartwo]: [number, number]): void => {
+		console.log(varone);
+		console.log(vartwo);
+	}
+
+And in this version vartwo is a string, varone is a number.
+	const logArr = ([varone, vartwo]: [number, string]): void => {
+		console.log(varone);
+		console.log(vartwo);
+	}
