@@ -1,0 +1,13 @@
+
+	*** type: any ***
+	*****************
+Its a type, just like "string" or "boolean"
+Means TS has no idea what this is. It can't check for correct property references.
+
+* Avoid variables with "any" at all costs! *
+The whole idea behind TS is all the types and that by having them defined it allows TS to catch errors inside of the code.
+If TS knows the different types it can look at any time we call a function on an object or reference a property on an object and
+figure out if I'm referencing something properly or if its something I made a typo on.
+
+So, any time there is a value with type any TS can not do any error checking at all around that value.
+
