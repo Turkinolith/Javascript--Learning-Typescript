@@ -1,0 +1,78 @@
+************************************
+**** Annotations with Functions ****
+************************************
+
+Lets go back to the previous function example:
+	const logNumber: (i: number) => void = (i) => {
+	  console.log(i);
+	};
+	
+The annotation wrote out here is for the VARIABLE, its telling TS that I'm assigning a value to the variable and it is going to have that type.
+Its going to be a function, take an argument, and have some return value.
+Again, that was modifying the variable.
+
+Now lets move to the right hand side of the equal sign.
+How to annotate the input arguments and the return values.
+
+
+Type annotations for functions - The difference here is no longer annotating a variable declaration, instead annotating the function itself.
+Type inference for functions - it only works around the return value from a function. it won't try to figure out type of arguments.
+
+Example, lets say I want a function that takes 2 numbers and returns the sum.
+	const add = (num1, num2 ) => {}
+
+Right now TS has no idea what the inputs are.
+So, I can tell it they will be numbers.
+
+	const add = (num1: number, num2: number ) => {}
+	
+Similarly, it makes sense that if I supply 2 numbers, that I'll get a number as the return, so I can tell it that.
+
+	const add = (num1: number, num2: number ): number => {}
+
+TS will give me a warning, it says that there is an error, that a function whos type is neither void or any MUST return a value.
+So, TS is simply saying that the function was going to return a value and that right now its not, because I havn't returned any value in it.
+So, its working as expected.
+Lets return a value.
+
+	const add = (num1: number, num2: number ): number => {
+		return num1 + num2
+	}
+
+Now the error is gone.
+
+
+
+	*** Inference Around Functions ***
+
+Every time we add in an argument list we annotate each argument. Then after the list we add in the return annotation.
+When the return annotation is added TS is going to immediately analyze the body of the function.
+In the case above TS knows that the arguments are numbers and that numbers added together results in a number and that I'm returning it, so it knows I'm doing 
+exactly what I said it was going to do.
+
+TS makes sure that the types are correct, but it does NOT verify the Logic.
+
+	const add = (num1: number, num2: number ): number => {
+		return num1 - num2
+	}
+
+I'm now returning the difference, I'm subtracting. This is valid TS code, even though the logic is wrong.
+
+
+	*ALWAYS add type annotations to function inputs as they will not be inferred otherwise.*
+However, on the other side, the output, we DO get benefit of type inference, but we won't use it.
+
+Why? Type inference on functions is not robust!
+
+	const add = (num1: number, num2: number ): number => {
+		return num1 + num2
+	}
+This is just fine, but lets say I add a new function for subtract and I don't put the return annotation:
+
+	const subtract = (num1: number, num2: number ) => {
+		num1 + num2
+	}
+
+No errors with this, but if I hover over the function name: (... => void )
+Its inferring I don't return anything, which is true, because I forgot to add a return statement!
+So if you want to avoid bugs like this, annotate the output.
