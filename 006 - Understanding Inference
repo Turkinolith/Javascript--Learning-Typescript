@@ -1,0 +1,59 @@
+*********************************
+**** Understanding Inference ****
+*********************************
+
+In the last session I saw that I could remove all of the type annotations from my initial sheet and I did not see any errors.
+Then when I hovered over them its clear that typescript still understands what type of value is assigned to it.
+In this section I'll go over how type inference works and how to rely on type inference vs manual annotations.
+
+	*** Basics of Type inference ***
+	********************************
+	Variable declaration, variable initialization.
+
+If they are on the same line, or essentially in one single expression, Typescript will figure out the type for me.
+	const color = "red"
+Typescript can figure out that a string is being assigned.
+
+If, like I've done in my integration tests, I declare a variable without initializing it then this won't work anymore.
+	let apples;
+	apples = 10;
+Typescript would say apples is of type "any"
+
+
+
+TYPE ANNOTATIONS
+When to use?
+	When we declare a variable on one line, then initialize it later.
+	When we want a variable to have a type that can't be inferred.
+	When a function returns the "any" type and we need to clarify the value.
+
+Type Inference
+When to use?
+	Always!
+
+
+
+	*** When to use annotations ***
+	*******************************
+1) Function that returns the "any" type
+
+	const json = '{"x": 10, "y": 20}';
+	const coordinates = JSON.parse(json);
+	console.log(coordinates); // expect {x: 10, y:20}
+
+note that when hovering over "coordinates" that the type is "any"
+Also note hovering over the .parse has a long nasty string, but ends with ": any" this means json parse function returns the "any" type.
+
+First, a quick pause while I go over how the JSON.parse function works.
+
+'false' 		-> JSON.parse() -> boolean
+'4' 			-> JSON.parse() -> number
+'{"value":5}' 	-> JSON.parse() -> {value: number}
+'{"name": "alex"}' -> JSON.parse() -> {name: string}
+
+This diagram is a little misleading, in reality any time I call JSON.parse I get back a value of the any type. This isn't what we get with typescript, its the ideal world.
+This is to help understand that any time I call JSON.parse I get back possibly some very different value types.
+
+Typescript can not predict the types, it depends entirely upon the string put into the function.
+So Typescript instead decides that it can't guess all the different types, so if you ever call JSON.parse you'll geet back the "any" type
+The "any" type means TS has no idea what type of value is being returned.
