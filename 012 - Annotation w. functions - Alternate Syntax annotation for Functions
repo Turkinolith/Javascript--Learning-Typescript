@@ -1,0 +1,14 @@
+	*** Alternate Syntax Annotations for Functions ***
+	**************************************************
+
+How to use annotations with a function defined with the function keyword or an anon function?
+The exact same way.
+
+	function divide(a: number, b: number): number {
+	  return a / b;
+	}
+
+	const multiply = function(a: number, b: number): number {
+	  return a * b:
+	}
+	
