@@ -1,0 +1,35 @@
+*****************************************************
+**** Manual Type Annotation #2 - uninit variable ****
+*****************************************************
+Manual type annotations are needed when a variable is declared, but not initialized with a value, being created type "any"
+
+	let larry;
+	larry = "Joe"
+	larry = 2
+	
+Here, even with given a "string" value, "larry" is still a type "any". TS doesn't complain at all that I changed the variable from a string to a number.
+
+let words = ['red', 'green', 'blue'];
+let foundWord;
+
+//lets say I want to write a for loop that iterates through this array and if I find a string equall to 'green' set foundWord to true.
+
+for (let i = 0; i < words.length; i++) {
+    if (words[i] === 'green') {
+        foundWord = true;
+    }
+}
+// This is a common example. I declared "foundWord" but did not init it. Mouse over, its type "any"
+// The tooltip even says a better type may be inferred from usage.
+// This actually means either add the type annotation or init it on the same line.
+
+let foundWord2: boolean;
+
+for (let i = 0; i < words.length; i++) {
+    if (words[i] === 'green') {
+        foundWord2 = true;
+    }
+}
+
+// Now TS knows that foundWord2 is a bool.
+//* Also the best way to write this code out would be to init the variable as "false", then TS would know whats going on.
