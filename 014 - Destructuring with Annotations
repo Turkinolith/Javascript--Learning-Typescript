@@ -1,0 +1,44 @@
+****************************************
+**** Destructuring with Annotations ****
+****************************************
+
+lets imagine we have an object that describes todays weather. its possibly got a date to indicate todays date and the current weather outside.
+That will probably be a string.
+
+	const todaysWeather = {
+		date: new Date(),
+		weather: 'sunny'
+	};
+
+Now lets create a function that will take the forecast and log out the weather and as such it takes a weather object as the argument.
+
+I need to annotate the argument type there with an object literal just like before.
+
+	const logWeather = (forecast: {date: Date, weather: string }): void => {
+		console.log(forecast.date);
+		console.log(forecast.weather);
+	}
+
+	logWeather(todaysWeather);
+
+
+One optimization is to use some ES6 syntax and destructure the date and weather properties out of the variable.
+Instead of refering to forecast.date and forecast.weather I pust pull the properties off directly inside the argument list.
+
+Normal syntax would be:
+	const logWeather = ({ date, weather }) => {
+	  console.log(date);
+	  console.log(weather);
+	}
+
+
+So, how to do this in TS with type annotations?
+Replace the variable itself with the actual destructuring statement.
+
+	const logWeather = ({ date, weather }: {date: Date, weather: string }): void => {
+		console.log(date);
+		console.log(weather);
+	}
+
+
+Note, that I did not try to stick the annotation types along with the destructuring portion. They will always be 2 separate statements separated by the colon.
