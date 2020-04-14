@@ -1,0 +1,51 @@
+************************************
+**** Annotations around Objects ****
+************************************
+Here is a complex object. It has a few simple properties like name and age, also a nested object like coords to represent the persons location in the world.
+Also has a method using the ES6 syntax for defining a method inside of an object. The method simply takes a number and sets the age property on the object to equal it, returning nothing.
+
+
+const profile = {
+    name: "alex",
+    age: 20,
+    coords: {
+        lat: 0,
+        lng: 15
+    },
+    setAge(age: number): void {
+        this.age = age;
+    }
+};
+
+Now lets use some object destructuring and pull different properties out of the object.
+Lets destructure out the age property and figure out what the exact syntax for that would be.
+
+You can use normal destructuring for this:
+	const { age } = profile;
+
+But if for some reason we fall into one of the 3 catagories that required an annotation directly on the variable I can do that as well by
+putting a colon then writing out the structure of the profile object.
+
+I can't just say its a number. I have to list out the structure of the profile object and any different properties I want it to have.
+
+	const { age }: { age: number } = profile;
+
+You might think I should only label it with the value its going to refer to, but that is not the case.
+If I want to use destructuring I need to write out the expected structure of the object that is being passed into it.
+
+In this case I expect the value to have a structure that is an object, with an age property, that is a number.
+
+
+To make things even more complicated, lets destructure the lat/long section.
+
+	const { coords: { lat, lng } } = profile;
+	
+This is the plain ES6 syntax.
+But once agian if I'm in one of the 3 conditions where I HAVE to put in an annotation:
+
+	const { coords: { lat, lng } }: { coords: { lat: number; lng: number} } = profile;
+
+
+Whenever working with functions I'll rely upon annotations 100% of the time for both arguments and return types.
+
+When working with variables rely upon type inference as much as possibly can unless I'm in one of the 3 scenarios described earlier.
