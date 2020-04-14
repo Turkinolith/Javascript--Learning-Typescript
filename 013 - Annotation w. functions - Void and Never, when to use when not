@@ -1,0 +1,63 @@
+	*** Void and Never ***
+	**********************
+
+I'll define a quick function:
+
+	const logger = (message: string) => {
+		console.log(message);
+	}
+
+This takes some message that is a string and calls console.log on it. It does not actually return any value.
+
+So to annoate this fact I put on void.
+
+	const logger = (message: string): void => {
+		console.log(message);
+	}
+
+This annotates that I have a function that will not return anything. Technically a function that returns void can return null and also return undefined
+but effectively I use void to say there is no return value from this function. 
+If I ever accidentally return anything I'll get an error.
+
+
+
+
+There is one other very special type associated with function return values:
+
+	const throwError = (message: string) => {
+		throw new Error(message)
+	}
+
+Any time you throw an error, the function will technically not actually return anything.
+To indicate that I can append type never
+
+	const throwError = (message: string): never => {
+		throw new Error(message)
+	}
+
+This means that I'm never going to actually reach the end of this function. At some point in time inside of it I'll throw an error
+and exit the function early without returning any value.
+
+Tis is a very edge case and it is pretty rare that I'll ever want to intentionally do this.
+
+More common is something like this:
+
+	const sendMessage = (message: string): string => {
+	  if (!message) {
+		throw new Error("something went wrong");
+	  }
+	  return message;
+	};
+
+in this case, I'd still annotate this as returning a string, even though it can throw an error.
+
+Only use type never if the function will truly never expect a return of anything ever.
+
+If I expect it to return something eventually and only possibly throw an error, thats fine, still annotate it with whatever I expect it to eventually return.
+
+In the below case, I'd still use "void" instead as its technically not returning anything and only has a chance to throw an error.
+	const sendMessage = (message: string): void => {
+	  if (!message) {
+		throw new Error("something went wrong");
+	  }
+	};
