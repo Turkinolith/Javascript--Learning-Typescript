@@ -1,0 +1,37 @@
+*************************************************************************************
+**** Manual Type annotation #3 - variable whos type cannot be inferred correctly ****
+*************************************************************************************
+This is a very big corner case really.
+
+let numbers = [-10, -1, 12]
+let numberAboveZero;
+
+//lets say I want to go through the numbers array, if I find a number greater than 0, I assign it to numberAboveZero.
+// Otherwise, I want to assign "false" to numberAboveZero.
+
+So, this means that I'm going to have two different types of values being assigned to this variable.
+This is some kind of bad code or writing here, but there are scenarios where you might need to do something like this.
+
+So, we say that by default numberAboveZero is false, if we ever need to find something above zero, then assign the number to it.
+
+
+let numbers2 = [-10, -1, 12]
+let numberAboveZero2 = false;
+for (let i = 0; i < numbers2.length; i++) {
+    if (numbers2[i] > 0) {
+        numberAboveZero2 = numbers2[i]
+    }
+}
+// Here TS already inferred that numbersAboveZero2 is a bool, correctly.
+// So one way to fix this is like so:
+
+let numbers3 = [-10, -1, 12]
+let numberAboveZero3: boolean|number = false;
+for (let i = 0; i < numbers3.length; i++) {
+    if (numbers3[i] > 0) {
+        numberAboveZero3 = numbers3[i]
+    }
+}
+
+// Now the numberAboveZero3 can be EITHER a bool or a number.
+// This is a bad code example but its an easy way to imagine such a scenario.
